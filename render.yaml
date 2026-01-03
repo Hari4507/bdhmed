@@ -12,7 +12,7 @@ services:
         fromService:
           name: bdh-frontend
           type: web
-          property: url
+          envVarKey: RENDER_EXTERNAL_URL
 
   - type: web
     name: bdh-frontend
@@ -25,4 +25,4 @@ services:
         fromService:
           name: bdh-backend
           type: web
-          property: url
+          envVarKey: RENDER_EXTERNAL_URL
