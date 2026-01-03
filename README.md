@@ -1,5 +1,8 @@
 # Brain-Derived Hierarchical (BDH) Adverse Event Learning System
 
+## Live Demo
+- Try it here: https://bdh-frontend-jjdo.onrender.com
+
 ## Overview
 This project implements a **Brain-Derived Hierarchical (BDH)** architecture for detecting and learning from adverse healthcare events in real-time. Unlike traditional Transformer models that require massive retraining, the BDH system uses **Hebbian learning** and **synaptic plasticity** to adapt immediately during the inference phase.
 
