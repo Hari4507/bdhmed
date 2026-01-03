@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: bdh-backend
+    env: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    autoDeploy: true
+    envVars:
+      - key: PYTHONPATH
+        value: .
+      - key: ALLOWED_ORIGINS
+        fromService:
+          name: bdh-frontend
+          type: web
+          property: url
+
+  - type: web
+    name: bdh-frontend
+    runtime: static
+    buildCommand: npm install --prefix frontend && npm run build --prefix frontend
+    staticPublishPath: frontend/dist
+    autoDeploy: true
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          name: bdh-backend
+          type: web
+          property: url

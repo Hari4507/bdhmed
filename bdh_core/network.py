@@ -1,7 +1,7 @@
 import json
 import os
 import hashlib
-from typing import List, Dict, Tuple
+from typing import List, Dict, Tuple, Union
 from .primitives import Neuron, Synapse
 
 DATA_PATH = os.path.join(os.getcwd(), "data", "network_state.json")
@@ -69,7 +69,7 @@ class BDHNetwork:
         neuron.fired = activation > 0.1
         return activation
 
-    def forward(self, inputs: Dict[str, str | List[str]]) -> Dict:
+    def forward(self, inputs: Dict[str, Union[str, List[str]]]) -> Dict:
         # Reset all activations
         for n in self.neurons.values():
             n.activation = 0.0
@@ -190,6 +190,7 @@ class BDHNetwork:
             "neurons": [n.to_dict() for n in self.neurons.values()],
             "synapses": [s.to_dict() for s in self.synapses]
         }
+        os.makedirs(os.path.dirname(DATA_PATH), exist_ok=True)
         with open(DATA_PATH, "w") as f:
             json.dump(data, f, indent=2)
 
